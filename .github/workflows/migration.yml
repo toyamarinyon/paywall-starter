@@ -15,5 +15,5 @@ jobs:
         node-version: '14'
     - run: yarn install
     - name: migrate
-      run: prisma migrate deploy --preview-feature
+      run: npx prisma migrate deploy --preview-feature
       working-directory: packages/prisma
