@@ -1,0 +1,19 @@
+name: Migration
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  migration:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: yarn install
+    - run:
+      working-directory: packages/prisma
+      shell: prisma migrate deploy --preview-feature
