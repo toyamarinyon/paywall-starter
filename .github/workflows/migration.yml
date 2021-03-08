@@ -27,3 +27,6 @@ jobs:
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
+      - name: migrate
+        run: npx prisma migrate deploy --preview-feature
+        working-directory: packages/prisma
