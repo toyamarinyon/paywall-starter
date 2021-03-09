@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'prisma/**'
 jobs:
   migration:
     runs-on: ubuntu-latest
