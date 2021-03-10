@@ -4,8 +4,6 @@ import Providers from "next-auth/providers";
 import Adapters from "next-auth/adapters";
 import { prisma } from "@paywall-content-platform/prisma";
 
-console.log(process.env.EMAIL_SERVER_USER)
-
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
 
