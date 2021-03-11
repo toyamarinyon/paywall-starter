@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { loadStripe } from "@stripe/stripe-js";
 import { prisma, Product } from "@paywall-content-platform/prisma";
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: true };
@@ -31,13 +33,20 @@ function ProductDetail({
     // Call your backend to create the Checkout Session
     const response = await fetch("/api/checkout/create", {
       method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        accessToken: session.accessToken,
+        productId: product.id,
+      }),
     });
 
-    const session = await response.json();
+    const stripeSession = await response.json();
 
     // When the customer clicks on the button, redirect them to Checkout.
     const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
+      sessionId: stripeSession.id,
     });
 
     if (result.error) {

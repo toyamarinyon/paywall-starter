@@ -1,19 +1,24 @@
 {
-  "name": "@paywall-content-platform/admin",
+  "name": "@paywall-content-platform/webhook",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3002",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.13.1",
+    "micro": "^9.3.4",
     "next": "10.0.8",
+    "next-auth": "^3.11.2",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@types/next-auth": "^3.7.0",
     "@types/node": "^14.14.32",
-    "@types/react": "^17.0.3"
+    "@types/react": "^17.0.3",
+    "@types/stripe": "^8.0.417"
   }
 }
