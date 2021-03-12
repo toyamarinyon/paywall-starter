@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { loadStripe } from "@stripe/stripe-js";
 import { prisma, Product } from "@paywall-content-platform/prisma";
+import { BaseLayout } from "components/layout";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
@@ -68,25 +69,27 @@ function ProductDetail({
     }
   }
   return (
-    <div>
-      {session ? (
-        <p>
-          Signed in as {session.user.email}
-          <br />
-          {user.hasProductToken ? (
-            <span>You're paid user!</span>
-          ) : (
-            <button onClick={() => onClick()}>Buy Now!</button>
-          )}
-        </p>
-      ) : (
-        <p>
-          Not signed in <br />
-          <button onClick={() => signIn()}>Sign in</button>
-        </p>
-      )}
-      <p>ヤッホー！{product.name}</p>
-    </div>
+    <BaseLayout>
+      <div>
+        {session ? (
+          <p>
+            Signed in as {session.user.email}
+            <br />
+            {user.hasProductToken ? (
+              <span>You're paid user!</span>
+            ) : (
+              <button onClick={() => onClick()}>Buy Now!</button>
+            )}
+          </p>
+        ) : (
+          <p>
+            Not signed in <br />
+            <button onClick={() => signIn()}>Sign in</button>
+          </p>
+        )}
+        <p>ヤッホー！{product.name}</p>
+      </div>
+    </BaseLayout>
   );
 }
 
