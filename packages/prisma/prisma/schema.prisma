@@ -80,6 +80,7 @@ model Product {
   stripeProductId     String               @unique @map(name: "stripe_proruct_id")
   productType         ProductType          @map(name: "product_type")
   productAccessTokens ProductAccessToken[]
+  coverUrl            String
 
   @@map(name: "products")
 }
