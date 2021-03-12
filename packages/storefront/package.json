@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3005",
     "build": "next build",
     "start": "next start"
   },
@@ -12,7 +12,8 @@
     "next": "10.0.8",
     "next-auth": "^3.11.2",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "swr": "^0.5.2"
   },
   "devDependencies": {
     "@types/next-auth": "^3.7.0",

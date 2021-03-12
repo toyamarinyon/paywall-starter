@@ -92,4 +92,5 @@ model ProductAccessToken {
   productId Int     @map(name: "product_id")
 
   @@map("product_access_tokens")
+  @@unique([userId, productId])
 }

@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { useRouter } from "next/router";
+import useSWR from "swr";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { loadStripe } from "@stripe/stripe-js";
 import { prisma, Product } from "@paywall-content-platform/prisma";
@@ -19,12 +19,24 @@ export const getStaticProps: GetStaticProps<{ product: Product }> = async ({
   return { props: { product } };
 };
 
+const fetcher = async function <JSON = any>(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<JSON> {
+  const res = await fetch(input, init);
+  return res.json();
+};
+
 function ProductDetail({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [session, loading] = useSession();
-  const router = useRouter();
-  if (router.isFallback || loading) {
+  const { data: user, error } = useSWR<{ hasProductToken: boolean }>(
+    () =>
+      `/api/user/productToken/?userAccessToken=${session.accessToken}&productId=${product.id}`,
+    fetcher
+  );
+  if (loading || !user) {
     return <div>loading...</div>;
   }
   async function onClick() {
@@ -61,7 +73,11 @@ function ProductDetail({
         <p>
           Signed in as {session.user.email}
           <br />
-          <button onClick={() => onClick()}>Buy Now!</button>
+          {user.hasProductToken ? (
+            <span>You're paid user!</span>
+          ) : (
+            <button onClick={() => onClick()}>Buy Now!</button>
+          )}
         </p>
       ) : (
         <p>
