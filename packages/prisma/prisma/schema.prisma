@@ -76,6 +76,7 @@ enum ProductType {
 model Product {
   id                  Int                  @id @default(autoincrement())
   name                String
+  description         String
   amount              Int
   stripeProductId     String               @unique @map(name: "stripe_proruct_id")
   productType         ProductType          @map(name: "product_type")
@@ -92,6 +93,6 @@ model ProductAccessToken {
   product   Product @relation(fields: [productId], references: [id])
   productId Int     @map(name: "product_id")
 
-  @@map("product_access_tokens")
   @@unique([userId, productId])
+  @@map("product_access_tokens")
 }

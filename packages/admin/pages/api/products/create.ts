@@ -5,9 +5,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2020-08-27",
 });
 async function CreateProduct(req: NextApiRequest, res: NextApiResponse) {
-  const { name, amount, coverUrl } = req.body;
+  const { name, description, amount, coverUrl } = req.body;
   const stripeProduct = await stripe.products.create({
     name,
+    description,
     images: [coverUrl],
   });
   await stripe.prices.create({
@@ -18,6 +19,7 @@ async function CreateProduct(req: NextApiRequest, res: NextApiResponse) {
   const product = await prisma.product.create({
     data: {
       name,
+      description,
       amount: parseInt(amount), // 自動でキャストはしてくれない
       stripeProductId: stripeProduct.id,
       productType: ProductType.classic,

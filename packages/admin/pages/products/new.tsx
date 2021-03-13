@@ -29,6 +29,7 @@ async function uploadImage(files: FileList): Promise<string> {
 }
 function NewProduct() {
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [amount, setAmount] = useState(0);
   const [cover, setCover] = useState<FileList>(undefined);
   return (
@@ -50,6 +51,7 @@ function NewProduct() {
               },
               body: JSON.stringify({
                 name,
+                description,
                 amount,
                 coverUrl
               }),
@@ -63,6 +65,12 @@ function NewProduct() {
         id="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+      />
+      <label htmlFor="description">説明</label>
+      <textarea
+        id="description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <label htmlFor="amount">金額</label>
       <input
