@@ -47,7 +47,7 @@ function ProductDetail({
               <p>{product.description}</p>
             </article>
           </section>
-          <section className="w-72">
+          <section className="w-full md:w-72">
             <div className="bg-white p-4 border shadow-sm">
               <p className="mb-1 text-xl font-bold">
                 {numberToJpyFormat(product.amount)}
