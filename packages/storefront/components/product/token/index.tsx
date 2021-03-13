@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import { loadStripe } from "@stripe/stripe-js";
 
 import { Product } from ".prisma/client";
-import { Button } from "./Button";
+import { Button } from "components/button";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );

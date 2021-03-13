@@ -4,14 +4,16 @@ import classnames from "classnames";
 interface ButtonProps {
   loading?: boolean;
   loadingText?: string;
+  text?: string;
 }
 export function Button({
   loading = false,
   loadingText = "処理中",
+  text = "購入する",
   ...props
 }: ButtonProps &
   React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLButtonElement>,
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   >) {
   return (
@@ -24,7 +26,7 @@ export function Button({
       )}
       disabled={loading}
     >
-      {loading ? <span>{loadingText}</span> : <span>購入する</span>}
+      {loading ? <span>{loadingText}</span> : <span>{text}</span>}
     </button>
   );
 }

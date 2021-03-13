@@ -1,10 +1,15 @@
 import React from "react";
+import classnames from "classnames";
 import { BaseLayout } from "./base";
 
-export function SlimLayout({ children }: { children: React.ReactNode }) {
+interface SlimLayoutProps {
+  children: React.ReactNode;
+  size?: string;
+}
+export function SlimLayout({ children, size = "max-w-screen-lg" }: SlimLayoutProps) {
   return (
     <BaseLayout>
-      <div className="md:px-20">{children}</div>
+      <div className={classnames("mx-auto", size)}>{children}</div>
     </BaseLayout>
   );
 }

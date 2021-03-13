@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.13.1",
+    "@tailwindcss/forms": "^0.2.1",
     "autoprefixer": "^10.2.5",
     "classnames": "^2.2.6",
     "next": "10.0.8",

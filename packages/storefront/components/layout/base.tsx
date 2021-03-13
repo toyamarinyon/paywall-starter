@@ -4,7 +4,7 @@ import { Character } from "assets/character";
 import Link from "next/link";
 export function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <header className="container mx-auto px-20 py-4 flex items-center">
         <section className="flex">
           <Link href="/">
@@ -15,9 +15,9 @@ export function BaseLayout({ children }: { children: React.ReactNode }) {
           <Character />
         </section>
       </header>
-      <div className="bg-gray-50">
+      <div className="bg-gray-50 flex-1">
         <div className="container mx-auto px-4 md:px-20 py-4">{children}</div>
       </div>
-    </>
+    </div>
   );
 }
