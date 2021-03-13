@@ -102,10 +102,11 @@ model ProductAccessToken {
 }
 
 model UserStripeCustomerRelation {
-  id               Int    @id @default(autoincrement())
-  user             User   @relation(fields: [userId], references: [id])
-  userId           Int    @map(name: "user_id")
-  stripeCustomerId String @map(name: "stripe_customer_id")
+  id               Int      @id @default(autoincrement())
+  user             User     @relation(fields: [userId], references: [id])
+  userId           Int      @map(name: "user_id")
+  stripeCustomerId String   @map(name: "stripe_customer_id")
+  createdAt        DateTime @default(now()) @map(name: "created_at")
 
   @@map("user_stripe_customer_relations")
 }

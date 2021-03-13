@@ -10,6 +10,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^1.13.1",
     "autoprefixer": "^10.2.5",
+    "classnames": "^2.2.6",
     "next": "10.0.8",
     "next-auth": "^3.11.2",
     "postcss": "^8.2.8",
@@ -19,6 +20,7 @@
     "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
     "@types/next-auth": "^3.7.0",
     "@types/node": "^14.14.32",
     "@types/react": "^17.0.3",

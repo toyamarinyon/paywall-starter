@@ -1,4 +1,5 @@
 import React from "react";
+import classnames from "classnames";
 
 interface ButtonProps {
   loading?: boolean;
@@ -13,11 +14,15 @@ export function Button({
     React.HTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   >) {
-    console.log(loading)
   return (
     <button
       {...props}
-      className={`px-4 py-1 bg-indigo-500 text-white rounded w-full ${props.className}`}
+      className={classnames(
+        "px-4 py-1 bg-indigo-500 text-white rounded w-full",
+        { "opacity-50": loading },
+        props.className
+      )}
+      disabled={loading}
     >
       {loading ? <span>{loadingText}</span> : <span>購入する</span>}
     </button>

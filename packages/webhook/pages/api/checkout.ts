@@ -61,12 +61,22 @@ async function CheckoutWebhook(req: NextApiRequest, res: NextApiResponse) {
         stripePaymentIntentId: checkoutSession.payment_intent.toString(),
       },
     });
-    await prisma.userStripeCustomerRelation.create({
-      data: {
-        userId: parseInt(checkoutSession.client_reference_id),
-        stripeCustomerId: checkoutSession.customer.toString(),
-      },
-    });
+    const checkoutUserStripeCustomerRelationsCount = await prisma.userStripeCustomerRelation.count(
+      {
+        where: {
+          userId: parseInt(checkoutSession.client_reference_id),
+          stripeCustomerId: checkoutSession.customer.toString(),
+        },
+      }
+    );
+    if (checkoutUserStripeCustomerRelationsCount < 1) {
+      await prisma.userStripeCustomerRelation.create({
+        data: {
+          userId: parseInt(checkoutSession.client_reference_id),
+          stripeCustomerId: checkoutSession.customer.toString(),
+        },
+      });
+    }
   } else {
     console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
   }

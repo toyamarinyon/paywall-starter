@@ -33,7 +33,7 @@ export function ProductToken({ id }: Product) {
     return <Button onClick={() => signIn()} />;
   }
   if (!user.hasProductToken) {
-    const onClick = async () => {
+    const onClick = async () => { 
       const stripe = await stripePromise;
 
       // Call your backend to create the Checkout Session
@@ -81,11 +81,7 @@ export function ProductToken({ id }: Product) {
 
   return (
     <div>
-      <p>
-        Signed in as {session.user.email}
-        <br />
-        <span>You're paid user!</span>
-      </p>
+      <p>ご購入ありがとうございました！</p>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export function ProductListItem({ id, name, coverUrl }: Product) {
       <Link href={`/products/${id}`}>
         <a className="flex flex-col p-4">
           <div className="relative h-24">
-            <Image src={coverUrl} layout="fill" />
+            <Image src={coverUrl} layout="fill" objectFit="contain" />
           </div>
           <div>{name}</div>
         </a>

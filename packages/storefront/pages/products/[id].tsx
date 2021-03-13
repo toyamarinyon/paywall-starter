@@ -35,8 +35,8 @@ function ProductDetail({
   return (
     <SlimLayout>
       <div>
-        <div className="relative h-48">
-          <Image src={product.coverUrl} layout="fill" />
+        <div className="relative h-96">
+          <Image src={product.coverUrl} layout="fill" objectFit="contain" />
         </div>
         <div className="flex flex-col md:flex-row justify-between">
           <section className="mb-4">
@@ -47,9 +47,11 @@ function ProductDetail({
               <p>{product.description}</p>
             </article>
           </section>
-          <section>
+          <section className="w-72">
             <div className="bg-white p-4 border shadow-sm">
-              <p className="mb-2 text-xl font-bold">{numberToJpyFormat(product.amount)}</p>
+              <p className="mb-1 text-xl font-bold">
+                {numberToJpyFormat(product.amount)}
+              </p>
               <ProductToken {...product} />
             </div>
           </section>
