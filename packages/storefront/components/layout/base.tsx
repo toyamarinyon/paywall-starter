@@ -14,7 +14,7 @@ export function BaseLayout({ children }: { children: React.ReactNode }) {
         <Character />
       </header>
       <div className="bg-gray-50">
-        <div className="container mx-auto px-20 py-4">{children}</div>
+        <div className="container mx-auto px-4 md:px-20 py-4">{children}</div>
       </div>
     </>
   );

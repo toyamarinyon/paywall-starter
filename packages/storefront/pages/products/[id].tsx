@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { prisma, Product } from "@paywall-content-platform/prisma";
 import { SlimLayout } from "components/layout";
-import { Dev } from "components/product/token/Dev";
-import Image from "next/image";
+import { ProductToken } from "components/product/token";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: true };
@@ -17,6 +17,13 @@ export const getStaticProps: GetStaticProps<{ product: Product }> = async ({
   return { props: { product } };
 };
 
+function numberToJpyFormat(number: number) {
+  return new Intl.NumberFormat("ja-JP", {
+    style: "currency",
+    currency: "JPY",
+  }).format(number);
+}
+
 function ProductDetail({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -28,17 +35,25 @@ function ProductDetail({
   return (
     <SlimLayout>
       <div>
-        <Dev {...product} />
         <div className="relative h-48">
           <Image src={product.coverUrl} layout="fill" />
         </div>
-        <header>
-          <h1 className="font-bold text-lg">{product.name}</h1>
-        </header>
-        <article>
-          <p>{product.description}</p>
-
-        </article>
+        <div className="flex flex-col md:flex-row justify-between">
+          <section className="mb-4">
+            <header>
+              <h1 className="font-bold text-lg">{product.name}</h1>
+            </header>
+            <article>
+              <p>{product.description}</p>
+            </article>
+          </section>
+          <section>
+            <div className="bg-white p-4 border shadow-sm">
+              <p className="mb-2 text-xl font-bold">{numberToJpyFormat(product.amount)}</p>
+              <ProductToken {...product} />
+            </div>
+          </section>
+        </div>
       </div>
     </SlimLayout>
   );
