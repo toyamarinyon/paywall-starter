@@ -57,6 +57,14 @@ async function CheckoutWebhook(req: NextApiRequest, res: NextApiResponse) {
       data: {
         productId: product.id,
         userId: parseInt(checkoutSession.client_reference_id),
+        stripeCheckoutId: checkoutSession.id,
+        stripePaymentIntentId: checkoutSession.payment_intent.toString(),
+      },
+    });
+    await prisma.userStripeCustomerRelation.create({
+      data: {
+        userId: parseInt(checkoutSession.client_reference_id),
+        stripeCustomerId: checkoutSession.customer.toString(),
       },
     });
   } else {

@@ -42,14 +42,15 @@ model Session {
 }
 
 model User {
-  id                  Int                  @id @default(autoincrement())
+  id                  Int                         @id @default(autoincrement())
   name                String?
-  email               String?              @unique
-  emailVerified       DateTime?            @map(name: "email_verified")
+  email               String?                     @unique
+  emailVerified       DateTime?                   @map(name: "email_verified")
   image               String?
-  createdAt           DateTime             @default(now()) @map(name: "created_at")
-  updatedAt           DateTime             @default(now()) @map(name: "updated_at")
+  createdAt           DateTime                    @default(now()) @map(name: "created_at")
+  updatedAt           DateTime                    @default(now()) @map(name: "updated_at")
   productAccessTokens ProductAccessToken[]
+  stripeCustomer      UserStripeCustomerRelation?
 
   @@map(name: "users")
 }
@@ -87,12 +88,24 @@ model Product {
 }
 
 model ProductAccessToken {
-  id        Int     @id @default(autoincrement())
-  user      User    @relation(fields: [userId], references: [id])
-  userId    Int     @map(name: "user_id")
-  product   Product @relation(fields: [productId], references: [id])
-  productId Int     @map(name: "product_id")
+  id                    Int      @id @default(autoincrement())
+  user                  User     @relation(fields: [userId], references: [id])
+  userId                Int      @map(name: "user_id")
+  product               Product  @relation(fields: [productId], references: [id])
+  productId             Int      @map(name: "product_id")
+  stripeCheckoutId      String   @unique
+  stripePaymentIntentId String   @unique
+  createdAt             DateTime @default(now()) @map(name: "created_at")
 
   @@unique([userId, productId])
   @@map("product_access_tokens")
+}
+
+model UserStripeCustomerRelation {
+  id               Int    @id @default(autoincrement())
+  user             User   @relation(fields: [userId], references: [id])
+  userId           Int    @map(name: "user_id")
+  stripeCustomerId String @map(name: "stripe_customer_id")
+
+  @@map("user_stripe_customer_relations")
 }
