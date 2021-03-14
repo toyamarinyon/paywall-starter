@@ -16,10 +16,8 @@ export default function SignIn({
   return (
     <SlimLayout size="max-w-sm">
       <header className="my-4">
-        <h1 className="font-bold text-lg">会員登録・ログイン</h1>
-        <p>
-          会員登録・ログイン用のリンクをお送りしますので、下記のフォームにメールアドレスを入力してください。
-        </p>
+        <h1 className="font-bold text-lg">ログイン</h1>
+        <p>ログイン用のリンクをお送りしますので、メールアドレスを入力してください。</p>
       </header>
       <form method="post" action="/api/auth/signin/email">
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
