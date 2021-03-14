@@ -93,8 +93,8 @@ model ProductAccessToken {
   userId                Int      @map(name: "user_id")
   product               Product  @relation(fields: [productId], references: [id])
   productId             Int      @map(name: "product_id")
-  stripeCheckoutId      String   @unique
-  stripePaymentIntentId String   @unique
+  stripeCheckoutId      String   @unique @map(name: "stripe_checkout_id")
+  stripePaymentIntentId String   @unique @map(name: "stripe_payment_intent_id")
   createdAt             DateTime @default(now()) @map(name: "created_at")
 
   @@unique([userId, productId])
