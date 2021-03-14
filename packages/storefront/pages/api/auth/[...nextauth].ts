@@ -2,7 +2,9 @@ import { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import Adapters from "next-auth/adapters";
+import nodemailer from "nodemailer";
 import { prisma } from "@paywall-content-platform/prisma";
+import { html, text } from "mails/auth/verificationRequest";
 
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
@@ -19,7 +21,36 @@ const options = {
         },
       },
       from: process.env.EMAIL_FROM,
-      // maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h)
+      // maxAge: 24 * 60 * 60, // How long email links are valid for (default 24h),
+      sendVerificationRequest: ({
+        identifier: enteredEmailAddress,
+        url,
+        token,
+        baseUrl,
+        provider,
+      }) => {
+        return new Promise((resolve, reject) => {
+          const { server, from } = provider;
+          const site = baseUrl.replace(/^https?:\/\//, "");
+          nodemailer.createTransport(server).sendMail(
+            {
+              to: enteredEmailAddress,
+              from,
+              subject: `Sign in to ${site}`,
+              text: text({ url, site, email: enteredEmailAddress }),
+              html: html({ url, site, email: enteredEmailAddress }),
+            },
+            (error) => {
+              if (error) {
+                return reject(
+                  new Error("SEND_VERIFICATION_EMAIL_ERROR")
+                );
+              }
+              return resolve();
+            }
+          );
+        });
+      },
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
