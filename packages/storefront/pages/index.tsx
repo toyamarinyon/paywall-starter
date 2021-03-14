@@ -8,7 +8,7 @@ export const getStaticProps: GetStaticProps<{
   products: Product[];
 }> = async () => {
   const products = await prisma.product.findMany();
-  return { props: { products } };
+  return { props: { products }, revalidate: 30 };
 };
 
 export default function Home({
