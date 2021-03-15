@@ -35,7 +35,7 @@ function ProductDetail({
   return (
     <SlimLayout>
       <div>
-        <div className="relative h-96">
+        <div className="relative h-96 mb-8">
           <Image src={product.coverUrl} layout="fill" objectFit="contain" />
         </div>
         <div className="flex flex-col md:flex-row justify-between">
