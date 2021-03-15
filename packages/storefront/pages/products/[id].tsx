@@ -4,6 +4,7 @@ import Image from "next/image";
 import { prisma, Product } from "@paywall-content-platform/prisma";
 import { SlimLayout } from "components/layout";
 import { ProductToken } from "components/product/token";
+import { useProductToken } from "data/product/usetoken";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: true };
@@ -28,6 +29,7 @@ function ProductDetail({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
+  const { hasProductToken } = useProductToken(product);
   if (router.isFallback) {
     return <div>loading...</div>;
   }
@@ -45,6 +47,9 @@ function ProductDetail({
             </header>
             <article>
               <p>{product.description}</p>
+              {hasProductToken && (
+                <p className="mt-4">ここは課金した人のみ表示されます</p>
+              )}
             </article>
           </section>
           <section className="w-full md:w-72">

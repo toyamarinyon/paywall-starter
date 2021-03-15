@@ -1,39 +1,27 @@
 import React, { useState } from "react";
-import useSWR from "swr";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { loadStripe } from "@stripe/stripe-js";
 
 import { Product } from ".prisma/client";
 import { Button } from "components/button";
+import { useProductToken } from "data/product/usetoken";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-const fetcher = async function <JSON = any>(
-  input: RequestInfo,
-  init?: RequestInit
-): Promise<JSON> {
-  const res = await fetch(input, init);
-  return res.json();
-};
 
-export function ProductToken({ id }: Product) {
+export function ProductToken(product: Product) {
   const [click, setClick] = useState(false);
-  const [session, loading] = useSession();
-  const { data: user, error } = useSWR<{ hasProductToken: boolean }>(
-    () =>
-      `/api/user/productToken/?userAccessToken=${session.accessToken}&productId=${id}`,
-    fetcher
-  );
-
-  if (loading || (session && !user)) {
+  const { loading, hasProductToken } = useProductToken(product);
+  const [session] = useSession();
+  if (loading) {
     return <div>Loading...</div>;
   }
   if (!session) {
     return <Button onClick={() => signIn()} />;
   }
-  if (!user.hasProductToken) {
-    const onClick = async () => { 
+  if (!hasProductToken) {
+    const onClick = async () => {
       const stripe = await stripePromise;
 
       // Call your backend to create the Checkout Session
@@ -44,7 +32,7 @@ export function ProductToken({ id }: Product) {
         },
         body: JSON.stringify({
           accessToken: session.accessToken,
-          productId: id,
+          productId: product.id,
         }),
       });
 
