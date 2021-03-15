@@ -12,8 +12,8 @@ export const config = {
   },
 };
 
-// const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET;
-const webhookSecret: string = "whsec_HY94DE2G47qKAve1oYrXvuKzrbrubMmO";
+const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET;
+// const webhookSecret: string = "whsec_HY94DE2G47qKAve1oYrXvuKzrbrubMmO";
 async function CheckoutWebhook(req: NextApiRequest, res: NextApiResponse) {
   const sig = req.headers["stripe-signature"];
 
