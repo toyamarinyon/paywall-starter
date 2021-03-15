@@ -24,6 +24,7 @@ async function CheckoutWebhook(req: NextApiRequest, res: NextApiResponse) {
   const buf = await buffer(req);
   let event: Stripe.Event;
 
+  console.log(webhookSecret);
   try {
     event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
   } catch (err) {
