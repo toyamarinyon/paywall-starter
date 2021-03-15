@@ -4,7 +4,7 @@ import Image from "next/image";
 import { prisma, Product } from "@paywall-content-platform/prisma";
 import { SlimLayout } from "components/layout";
 import { ProductToken } from "components/product/token";
-import { useProductToken } from "data/product/usetoken";
+import { useProductToken } from "data/product/use-token";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: true };

@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 import { Product } from ".prisma/client";
 import { Button } from "components/button";
-import { useProductToken } from "data/product/usetoken";
+import { useProductToken } from "data/product/use-token";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
