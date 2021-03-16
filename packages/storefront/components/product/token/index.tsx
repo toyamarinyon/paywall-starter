@@ -5,14 +5,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Product } from ".prisma/client";
 import { Button } from "components/button";
 import { useProductToken } from "data/product/use-token";
+import Link from "next/link";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-
 export function ProductToken(product: Product) {
   const [click, setClick] = useState(false);
-  const { loading, hasProductToken } = useProductToken(product);
+  const { loading, hasProductToken, billingStatus } = useProductToken(product);
   const [session] = useSession();
   if (loading) {
     return <div>Loading...</div>;
@@ -62,9 +62,41 @@ export function ProductToken(product: Product) {
           }}
           className="mb-2"
         />
-        <p className="text-gray-500 test-sm">外部の決済サイトに遷移します。</p>
+        <p className="text-gray-500 test-sm text-center">
+          外部の決済サイトに遷移します。
+        </p>
+        <div className="relative">
+          <hr className="my-6" />
+          <div className="absolute flex justify-center items-center w-full h-full top-0">
+            <span className="px-2 bg-white text-sm text-gray-400">
+              もしくは
+            </span>
+          </div>
+        </div>
+
+        <Link href={`/bank-transfer/form?productId=${product.id}`}>
+          <a
+            className="text-blue-500 text-center block"
+            // onClick={() => {
+            //   fetch("/api/invoices/create", {
+            //     method: "POST",
+            //     headers: {
+            //       "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //       productId: product.id,
+            //     }),
+            //   });
+            // }}
+          >
+            銀行振り込みでのお支払いをご希望の方はこちら
+          </a>
+        </Link>
       </>
     );
+  }
+  if (billingStatus === "open") {
+    return <p>銀行振り込みの連絡をお待ちしています。</p>;
   }
 
   return (

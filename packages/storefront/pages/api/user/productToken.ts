@@ -14,7 +14,21 @@ async function ProductToken(req: NextApiRequest, res: NextApiResponse) {
       },
     },
   });
-  res.send({ hasProductToken: productAccessToken });
+  if (!productAccessToken) {
+    res.status(404).send({});
+    return;
+  }
+  const billingRelation = await prisma.productAccessTokenStripeBillingRelation.findUnique(
+    {
+      where: {
+        id: productAccessToken.stripeBillingRelationId,
+      },
+    }
+  );
+  res.send({
+    hasProductToken: productAccessToken ? true : false,
+    billingStatus: billingRelation.billingStatus,
+  });
 }
 
 export default ProductToken;

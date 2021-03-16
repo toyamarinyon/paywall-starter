@@ -29,7 +29,7 @@ function ProductDetail({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
-  const { hasProductToken } = useProductToken(product);
+  const { hasPaidProductToken, hasOpenProductToken } = useProductToken(product);
   if (router.isFallback) {
     return <div>loading...</div>;
   }
@@ -40,14 +40,22 @@ function ProductDetail({
         <div className="relative h-96 mb-8">
           <Image src={product.coverUrl} layout="fill" objectFit="contain" />
         </div>
-        <div className="flex flex-col md:flex-row justify-between">
+        {hasOpenProductToken && (
+          <section className="p-6 shadow-sm mb-12 bg-yellow-50 rounded border-yellow-500 border-2">
+            <header className="mb-2">
+              <h2 className="text-xl font-bold">まだ参加登録は完了していません</h2>
+            </header>
+            請求書をEメールでお送りしています。振り込みいただきましたら事務局までご連絡ください。
+          </section>
+        )}
+        <div className="flex flex-col md:flex-row justify-between md:space-x-4">
           <section className="mb-4">
             <header>
               <h1 className="font-bold text-lg">{product.name}</h1>
             </header>
             <article>
               <p>{product.description}</p>
-              {hasProductToken && (
+              {hasPaidProductToken && (
                 <p className="mt-4">ここは課金した人のみ表示されます</p>
               )}
             </article>

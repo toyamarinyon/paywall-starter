@@ -54,12 +54,19 @@ async function CheckoutWebhook(req: NextApiRequest, res: NextApiResponse) {
         stripeProductId: lineItem.price.product.toString(),
       },
     });
+    const stripeBillingRelation = await prisma.productAccessTokenStripeBillingRelation.create(
+      {
+        data: {
+          collectionMethod: "checkout",
+          stripeId: checkoutSession.payment_intent.toString(),
+        },
+      }
+    );
     await prisma.productAccessToken.create({
       data: {
         productId: product.id,
         userId: parseInt(checkoutSession.client_reference_id),
-        stripeCheckoutId: checkoutSession.id,
-        stripePaymentIntentId: checkoutSession.payment_intent.toString(),
+        stripeBillingRelationId: stripeBillingRelation.id,
       },
     });
     const checkoutUserStripeCustomerRelationsCount = await prisma.userStripeCustomerRelation.count(

@@ -88,17 +88,37 @@ model Product {
 }
 
 model ProductAccessToken {
-  id                    Int      @id @default(autoincrement())
-  user                  User     @relation(fields: [userId], references: [id])
-  userId                Int      @map(name: "user_id")
-  product               Product  @relation(fields: [productId], references: [id])
-  productId             Int      @map(name: "product_id")
-  stripeCheckoutId      String   @unique @map(name: "stripe_checkout_id")
-  stripePaymentIntentId String   @unique @map(name: "stripe_payment_intent_id")
-  createdAt             DateTime @default(now()) @map(name: "created_at")
+  id                      Int                                     @id @default(autoincrement())
+  user                    User                                    @relation(fields: [userId], references: [id])
+  userId                  Int                                     @map(name: "user_id")
+  product                 Product                                 @relation(fields: [productId], references: [id])
+  productId               Int                                     @map(name: "product_id")
+  createdAt               DateTime                                @default(now()) @map(name: "created_at")
+  stripeBillingRelationId Int                                     @map(name: "stripe_billin_relation_id")
+  stripeBillingRelation   ProductAccessTokenStripeBillingRelation @relation(fields: [stripeBillingRelationId], references: [id])
 
   @@unique([userId, productId])
   @@map("product_access_tokens")
+}
+
+enum CollectionMethod {
+  checkout
+  sendInvoice
+}
+
+enum BillingStatus {
+  paid
+  open
+}
+
+model ProductAccessTokenStripeBillingRelation {
+  id                 Int                 @id @default(autoincrement())
+  ProductAccessToken ProductAccessToken?
+  collectionMethod   CollectionMethod
+  stripeId           String @map(name: "stripe_id")
+  billingStatus      BillingStatus @map(name: "billing_status") @default(paid)
+
+  @@map("stripe_billing_relations")
 }
 
 model UserStripeCustomerRelation {
