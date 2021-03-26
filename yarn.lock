@@ -142,6 +142,11 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.1.tgz#9daf5745156fd84b8e9889a2dc721f0c58e894aa"
   integrity sha512-CAEbWH7OIur6jEOzaai83jq3FmKmv4PmX1JYfs9IrYcGEVI/lyL1EXJGCj7eFVJ0bg5QR8LMxBlEtA+xKiLpFw==
 
+"@logdna/tail-file@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@logdna/tail-file/-/tail-file-2.0.6.tgz#083bf0aceca3c128be8d7d92290c90cc038b75eb"
+  integrity sha512-RSwA1ZWaDFdDjCqOdk5ZtCuf3bmyai8in9UQmIU57P2ZVcUbkQZ3HevC+WZ1QYyHwph3RgJQmC4IvAAi5yHIig==
+
 "@next/env@10.0.8":
   version "10.0.8"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.8.tgz#3306c9de20ef187438affbafce0ef966c9e43c3b"
@@ -270,7 +275,7 @@
     "@types/express" "^4.16.0"
     read-package-json "^2.0.13"
 
-"@pulumi/pulumi@^2.0.0", "@pulumi/pulumi@^2.15.0":
+"@pulumi/pulumi@^2.15.0":
   version "2.22.0"
   resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-2.22.0.tgz#6c86ce4682d5d2b4e4948a9f3f50f51761deb928"
   integrity sha512-a4RFbb7Ly7aa+rlypIBVHUByFa8qwY0mRStRqGT/xPiO8MZ957b1uCK60pOniPGe6sSYQ6tz/HGweRlpP18pcA==
@@ -286,6 +291,28 @@
     require-from-string "^2.0.1"
     semver "^6.1.0"
     source-map-support "^0.4.16"
+    ts-node "^7.0.1"
+    typescript "~3.7.3"
+    upath "^1.1.0"
+
+"@pulumi/pulumi@^2.23.2":
+  version "2.23.2"
+  resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-2.23.2.tgz#f6677ea16359e2ddbe3498975e20e60716a76a5b"
+  integrity sha512-V5vnzWdtTPlRBp6Fcexf9X4+IZH8e9YA1jvnuGVboLpZp/abmj1G1PFIhQ1YwLJsph87pHlAweDY17Li9XF42w==
+  dependencies:
+    "@grpc/grpc-js" "^1.2.7"
+    "@logdna/tail-file" "^2.0.6"
+    "@pulumi/query" "^0.3.0"
+    google-protobuf "^3.5.0"
+    js-yaml "^3.14.0"
+    minimist "^1.2.0"
+    normalize-package-data "^2.4.0"
+    protobufjs "^6.8.6"
+    read-package-tree "^5.3.1"
+    require-from-string "^2.0.1"
+    semver "^6.1.0"
+    source-map-support "^0.4.16"
+    split2 "^3.2.2"
     ts-node "^7.0.1"
     typescript "~3.7.3"
     upath "^1.1.0"
@@ -3610,7 +3637,7 @@ readable-stream@^2.0.2, readable-stream@^2.3.3, readable-stream@^2.3.6:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-readable-stream@^3.1.1, readable-stream@^3.5.0, readable-stream@^3.6.0:
+readable-stream@^3.0.0, readable-stream@^3.1.1, readable-stream@^3.5.0, readable-stream@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.6.0.tgz#337bbda3adc0706bd3e024426a286d4b4b2c9198"
   integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
@@ -3865,6 +3892,13 @@ spdx-license-ids@^3.0.0:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.7.tgz#e9c18a410e5ed7e12442a549fbd8afa767038d65"
   integrity sha512-U+MTEOO0AiDzxwFvoa4JVnMV6mZlJKk2sBLt90s7G0Gd0Mlknc7kxEn3nuDPNZRta7O2uy8oLcZLVT+4sqNZHQ==
+
+split2@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/split2/-/split2-3.2.2.tgz#bf2cf2a37d838312c249c89206fd7a17dd12365f"
+  integrity sha512-9NThjpgZnifTkJpzTZ7Eue85S49QwpNhZTq6GRJwObb6jnLFNGB7Qm73V5HewTROPyxD0C29xqmaI68bQtV+hg==
+  dependencies:
+    readable-stream "^3.0.0"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
