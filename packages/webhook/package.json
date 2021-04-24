@@ -16,7 +16,7 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "@types/next-auth": "^3.7.1",
+    "@types/next-auth": "^3.15.0",
     "@types/node": "^14.14.34",
     "@types/react": "^17.0.3",
     "@types/stripe": "^8.0.417"
