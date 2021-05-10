@@ -2893,6 +2893,11 @@ nanoid@^3.1.20:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.21.tgz#25bfee7340ac4185866fbfb2c9006d299da1be7f"
   integrity sha512-A6oZraK4DJkAOICstsGH98dvycPr/4GGDH7ZWKmMdd3vGcOurZ6JmWFUt0DA5bzrrn2FrUjmv6mFNWvv8jpppA==
 
+nanoid@^3.1.22:
+  version "3.1.22"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.22.tgz#b35f8fb7d151990a8aebd5aa5015c03cf726f844"
+  integrity sha512-/2ZUaJX2ANuLtTvqTlgqBQNJoQO398KyJgZloL0PZkC0dpysjncRUPsFe3DUPzz/y3h+u7C46np8RMuvF3jsSQ==
+
 native-url@0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/native-url/-/native-url-0.3.4.tgz#29c943172aed86c63cee62c8c04db7f5756661f8"
@@ -3356,13 +3361,22 @@ postcss@^7.0.32:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.6, postcss@^8.2.1, postcss@^8.2.8:
+postcss@^8.1.6, postcss@^8.2.1:
   version "8.2.8"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.8.tgz#0b90f9382efda424c4f0f69a2ead6f6830d08ece"
   integrity sha512-1F0Xb2T21xET7oQV9eKuctbM9S7BC0fetoHCc4H13z0PT6haiRLP4T0ZY4XWh7iLP0usgqykT6p9B2RtOf4FPw==
   dependencies:
     colorette "^1.2.2"
     nanoid "^3.1.20"
+    source-map "^0.6.1"
+
+postcss@^8.2.14:
+  version "8.2.14"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.14.tgz#dcf313eb8247b3ce8078d048c0e8262ca565ad2b"
+  integrity sha512-+jD0ZijcvyCqPQo/m/CW0UcARpdFylq04of+Q7RKX6f/Tu+dvpUI/9Sp81+i6/vJThnOBX09Quw0ZLOVwpzX3w==
+  dependencies:
+    colorette "^1.2.2"
+    nanoid "^3.1.22"
     source-map "^0.6.1"
 
 preact-render-to-string@^5.1.14:
