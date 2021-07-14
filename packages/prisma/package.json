@@ -13,6 +13,6 @@
     "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'"
   },
   "dependencies": {
-    "@prisma/client": "^2.18.0"
+    "@prisma/client": "^2.27.0"
   }
 }
